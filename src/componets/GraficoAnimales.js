@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, View,Text ,Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { BarChart } from "react-native-chart-kit";
 
-const GraficoAnimal = ({ dataAnimal }) => {
+const GraficoAnimal = ({ data }) => { // Cambiado a `data`
   let screenWidth = Dimensions.get("window").width;
 
   return (
     <View style={styles.container}>
-<Text style={styles.text}>Grafico de conteo de edad de animales</Text>
+      <Text style={styles.text}>Gráfico de conteo de edad de animales</Text>
       <BarChart
-        data={dataAnimal}  
+        data={data}  // Cambiado a `data`
         width={screenWidth - (screenWidth * 0.1)}
         height={300}
         chartConfig={{

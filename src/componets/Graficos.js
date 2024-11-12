@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView,Text, StyleSheet } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../Database/Firebaseconfig';
 import GraficoAnimal from './GraficoAnimales';
-import GraficoFiltrado from './GraficoFiltrado';
 import Footer from './Footer';
 
 export default function EstadisticasMascotas() {
-  const [dataEdades, setDataEdades] = useState({
-    labels: [],
-    datasets: [{ data: [] }]
-  });
+  const [dataEdades, setDataEdades] = useState(null); // Cambiado a null para verificar datos antes de renderizar
 
   useEffect(() => {
     const obtenerDatosEdad = async () => {
@@ -42,10 +38,13 @@ export default function EstadisticasMascotas() {
   }, []);
 
   return (
-    
     <ScrollView contentContainerStyle={styles.container}>
-     <GraficoAnimal data={dataAnimal} />
-      <Footer></Footer>
+      {dataEdades ? ( // Verifica si `dataEdades` tiene datos antes de renderizar `GraficoAnimal`
+        <GraficoAnimal data={dataEdades} />
+      ) : (
+        <View><Text>Cargando datos...</Text></View> // Mensaje de carga
+      )}
+      <Footer />
     </ScrollView>
   );
 }
